@@ -15,7 +15,7 @@ async function main() {
   console.log(`You are currently in ${os.homedir()}\n`);
 
   rl.on("close", () => {
-    console.log(`Thank you for using File Manager, ${user}, goodbye!\n`)
+    console.log(`Thank you for using File Manager, ${user}, goodbye!\n`);
   });
 
   while (hasNextCommand) {
@@ -26,24 +26,17 @@ async function main() {
         currentDir = getUpPath(currentDir);
         break;
       case "cd":
-        currentDir = getNewCurrentDirectoryPath(currentDir, answer.split(" ")[1]);
+        currentDir = await getNewCurrentDirectoryPath(
+          currentDir,
+          answer.split(" ")[1]
+        );
         break;
       default:
         console.log("Invalid command\n");
     }
 
     console.log(`You are currently in ${currentDir}\n`);
-
   }
-//   process.on('SIGINT', exitHandler.bind(null, {exit:true}))
-
-//   process.on("exit", function () {
-//     console.log(`Thank you for using File Manager, ${user}, goodbye!\n`);
-//   });
-//   process.on('SIGINT', function () {
-//     console.log('Ctrl-C...');
-//     process.exit(2);
-//   });
 }
 
 await main();
