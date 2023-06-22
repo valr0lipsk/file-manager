@@ -4,6 +4,7 @@ import os from "os";
 import { getUpPath } from "./fs/up.js";
 import { getNewCurrentDirectoryPath } from "./fs/cd.js";
 import { parseCommand } from "./parseCommand.js";
+import { listFromDirectory } from "./fs/ls.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -20,6 +21,7 @@ async function main() {
 
   while (hasNextCommand) {
     const answer = await rl.question("Please enter a command\n");
+    // prompt("Please enter a command\n");
 
     switch (parseCommand(answer)) {
       case "up":
@@ -30,6 +32,9 @@ async function main() {
           currentDir,
           answer.split(" ")[1]
         );
+        break;
+      case "ls":
+        await listFromDirectory(currentDir);
         break;
       default:
         console.log("Invalid command\n");
