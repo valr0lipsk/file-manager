@@ -7,6 +7,7 @@ import { parseCommand } from "./parseCommand.js";
 import { listFromDirectory } from "./fs/ls.js";
 import { createFile } from "./fs/create.js";
 import { deleteFile } from "./fs/delete.js";
+import { renameFile } from "./fs/rename.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -42,6 +43,13 @@ async function main() {
         break;
       case "rm":
         await deleteFile(currentDir, answer.split(" ")[1]);
+        break;
+      case "rn":
+        await renameFile(
+          currentDir,
+          answer.split(" ")[1],
+          answer.split(" ")[2]
+        );
         break;
       default:
         console.log("Invalid command\n");
