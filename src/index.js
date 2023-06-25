@@ -6,6 +6,7 @@ import { getNewCurrentDirectoryPath } from "./fs/cd.js";
 import { parseCommand } from "./parseCommand.js";
 import { listFromDirectory } from "./fs/ls.js";
 import { createFile } from "./fs/create.js";
+import { deleteFile } from "./fs/delete.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -38,6 +39,9 @@ async function main() {
         break;
       case "add":
         await createFile(currentDir, answer.split(" ")[1]);
+        break;
+      case "rm":
+        await deleteFile(currentDir, answer.split(" ")[1]);
         break;
       default:
         console.log("Invalid command\n");
