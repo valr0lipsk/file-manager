@@ -5,6 +5,7 @@ import { getUpPath } from "./fs/up.js";
 import { getNewCurrentDirectoryPath } from "./fs/cd.js";
 import { parseCommand } from "./parseCommand.js";
 import { listFromDirectory } from "./fs/ls.js";
+import { createFile } from "./fs/create.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -21,7 +22,6 @@ async function main() {
 
   while (hasNextCommand) {
     const answer = await rl.question("Please enter a command\n");
-    // prompt("Please enter a command\n");
 
     switch (parseCommand(answer)) {
       case "up":
@@ -35,6 +35,9 @@ async function main() {
         break;
       case "ls":
         await listFromDirectory(currentDir);
+        break;
+      case "add":
+        await createFile(currentDir, answer.split(" ")[1]);
         break;
       default:
         console.log("Invalid command\n");
