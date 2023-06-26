@@ -8,6 +8,7 @@ import { listFromDirectory } from "./fs/ls.js";
 import { createFile } from "./fs/create.js";
 import { deleteFile } from "./fs/delete.js";
 import { renameFile } from "./fs/rename.js";
+import { readFileContent } from "./fs/cat.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -50,6 +51,9 @@ async function main() {
           answer.split(" ")[1],
           answer.split(" ")[2]
         );
+        break;
+      case "cat":
+        await readFileContent(currentDir, answer.split(" ")[1]);
         break;
       default:
         console.log("Invalid command\n");
