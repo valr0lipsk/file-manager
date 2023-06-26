@@ -14,6 +14,7 @@ import {
 import getOSInfo from "./os/index.js";
 import { parseCommand } from "./parseCommand.js";
 import getHash from "./hash/index.js";
+import { compressFile, decompressFile } from "./zip/index.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -68,6 +69,20 @@ async function main() {
         break;
       case "hash":
         await getHash(currentDir, answer.split(" ")[1]);
+        break;
+      case "compress":
+        await compressFile(
+          currentDir,
+          answer.split(" ")[1],
+          answer.split(" ")[2]
+        );
+        break;
+      case "decompress":
+        await decompressFile(
+          currentDir,
+          answer.split(" ")[1],
+          answer.split(" ")[2]
+        );
         break;
       default:
         console.log("Invalid command\n");
