@@ -10,4 +10,4 @@ async function createFile(currentDir, fileName) {
   }
 }
 
-export { createFile };
+export default createFile;

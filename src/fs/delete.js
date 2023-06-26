@@ -10,4 +10,4 @@ async function deleteFile(currentDir, fileName) {
   }
 }
 
-export { deleteFile };
+export default deleteFile;

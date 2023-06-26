@@ -9,4 +9,4 @@ async function listFromDirectory(dirPath) {
   });
 }
 
-export { listFromDirectory };
+export default listFromDirectory;
