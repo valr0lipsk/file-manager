@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "start": "node src/index.js -- --username=Valr"
+    "start:test": "node src/index.js --username=Valr"
   },
   "author": "",
   "license": "ISC"

@@ -17,7 +17,7 @@ import getHash from "./hash/index.js";
 import { compressFile, decompressFile } from "./zip/index.js";
 
 async function main() {
-  const user = process.argv[3].split("=")[1];
+  const user = process.argv[2].split("=")[1];
   let currentDir = os.homedir();
   const rl = readline.createInterface({ input, output });
   let hasNextCommand = true;
