@@ -1,6 +1,5 @@
 import path from "path";
 import fs from "fs";
-import util from "util";
 
 async function readFileContent(currentDir, fileName) {
   try {
@@ -14,8 +13,8 @@ async function readFileContent(currentDir, fileName) {
       stream.on("error", reject);
     });
   } catch (err) {
-    console.error(err);
+    console.error(`File "${fileName}" does not exist\n`);
   }
 }
 
-export { readFileContent };
+export default readFileContent;
