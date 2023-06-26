@@ -8,6 +8,7 @@ import {
   deleteFile,
   renameFile,
   readFileContent,
+  copyFile,
 } from "./fs/index.js";
 import { parseCommand } from "./parseCommand.js";
 
@@ -52,6 +53,9 @@ async function main() {
         break;
       case "cat":
         await readFileContent(currentDir, answer.split(" ")[1]);
+        break;
+      case "cp":
+        await copyFile(currentDir, answer.split(" ")[1], answer.split(" ")[2]);
         break;
       default:
         console.log("Invalid command\n");
