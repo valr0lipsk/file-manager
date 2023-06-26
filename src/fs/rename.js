@@ -1,6 +1,5 @@
 import path from "path";
 import fs from "fs/promises";
-import exp from "constants";
 
 async function renameFile(currentDir, oldName, newName) {
   try {
@@ -14,4 +13,4 @@ async function renameFile(currentDir, oldName, newName) {
   }
 }
 
-export { renameFile };
+export default renameFile;

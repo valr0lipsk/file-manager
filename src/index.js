@@ -1,14 +1,15 @@
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 import os from "os";
-import { getUpPath } from "./fs/up.js";
-import { getNewCurrentDirectoryPath } from "./fs/cd.js";
+import { getUpPath, getNewPath } from "./navigation/index.js";
+import {
+  listFromDirectory,
+  createFile,
+  deleteFile,
+  renameFile,
+  readFileContent,
+} from "./fs/index.js";
 import { parseCommand } from "./parseCommand.js";
-import { listFromDirectory } from "./fs/ls.js";
-import { createFile } from "./fs/create.js";
-import { deleteFile } from "./fs/delete.js";
-import { renameFile } from "./fs/rename.js";
-import { readFileContent } from "./fs/cat.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -31,10 +32,7 @@ async function main() {
         currentDir = getUpPath(currentDir);
         break;
       case "cd":
-        currentDir = await getNewCurrentDirectoryPath(
-          currentDir,
-          answer.split(" ")[1]
-        );
+        currentDir = await getNewPath(currentDir, answer.split(" ")[1]);
         break;
       case "ls":
         await listFromDirectory(currentDir);

@@ -16,4 +16,4 @@ async function getNewCurrentDirectoryPath(currentDirectoryPath, newPath) {
   }
 }
 
-export { getNewCurrentDirectoryPath };
+export default getNewCurrentDirectoryPath;
