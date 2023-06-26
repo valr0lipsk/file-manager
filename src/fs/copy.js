@@ -2,7 +2,6 @@ import path from "path";
 import fs from "fs";
 
 async function copyFile(currentDir, fileName, pathToCopy) {
-  console.log(currentDir, fileName, pathToCopy);
   try {
     const curPath = path.resolve(currentDir, fileName);
     const copyPath = path.resolve(pathToCopy, fileName);
