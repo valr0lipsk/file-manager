@@ -11,7 +11,9 @@ import {
   copyFile,
   moveFile,
 } from "./fs/index.js";
+import getOSInfo from "./os/index.js";
 import { parseCommand } from "./parseCommand.js";
+import getHash from "./hash/index.js";
 
 async function main() {
   const user = process.argv[3].split("=")[1];
@@ -60,6 +62,12 @@ async function main() {
         break;
       case "mv":
         await moveFile(currentDir, answer.split(" ")[1], answer.split(" ")[2]);
+        break;
+      case "os":
+        await getOSInfo(answer.split(" ")[1]);
+        break;
+      case "hash":
+        await getHash(currentDir, answer.split(" ")[1]);
         break;
       default:
         console.log("Invalid command\n");
