@@ -10,10 +10,10 @@ async function copyFile(currentDir, args) {
 
   const sourceFile = args[0];
   const destination = args.slice(1).join(" ");
-
+  const sourceFileName = path.basename(sourceFile);
   try {
     const sourcePath = path.resolve(currentDir, sourceFile);
-    const destPath = path.resolve(currentDir, destination, sourceFile);
+    const destPath = path.resolve(currentDir, destination, sourceFileName);
 
     await pipeline(
       fs.createReadStream(sourcePath),
