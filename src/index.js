@@ -31,58 +31,52 @@ async function main() {
 
   while (hasNextCommand) {
     const answer = await rl.question("Please enter a command\n");
+    const [_, ...args] = answer.split(/\s+/);
+    const restOfCommand = args.join(" ");
 
     switch (parseCommand(answer)) {
       case "up":
-        currentDir = getUpPath(currentDir);
+        currentDir = await getUpPath(currentDir);
         break;
       case "cd":
-        currentDir = await getNewPath(currentDir, answer.split(" ")[1]);
+        currentDir = await getNewPath(currentDir, restOfCommand);
         break;
       case "ls":
         await listFromDirectory(currentDir);
         break;
       case "add":
-        await createFile(currentDir, answer.split(" ")[1]);
+        await createFile(currentDir, restOfCommand);
         break;
       case "rm":
-        await deleteFile(currentDir, answer.split(" ")[1]);
+        await deleteFile(currentDir, restOfCommand);
         break;
       case "rn":
         await renameFile(
           currentDir,
-          answer.split(" ")[1],
-          answer.split(" ")[2]
+          restOfCommand.split(" ")[0],
+          restOfCommand.split(" ")[1]
         );
         break;
       case "cat":
-        await readFileContent(currentDir, answer.split(" ")[1]);
+        await readFileContent(currentDir, restOfCommand);
         break;
       case "cp":
-        await copyFile(currentDir, answer.split(" ")[1], answer.split(" ")[2]);
+        await copyFile(currentDir, args);
         break;
       case "mv":
-        await moveFile(currentDir, answer.split(" ")[1], answer.split(" ")[2]);
+        await moveFile(currentDir, args);
         break;
       case "os":
-        await getOSInfo(answer.split(" ")[1]);
+        await getOSInfo(restOfCommand);
         break;
       case "hash":
-        await getHash(currentDir, answer.split(" ")[1]);
+        await getHash(currentDir, restOfCommand);
         break;
       case "compress":
-        await compressFile(
-          currentDir,
-          answer.split(" ")[1],
-          answer.split(" ")[2]
-        );
+        await compressFile(currentDir, args);
         break;
       case "decompress":
-        await decompressFile(
-          currentDir,
-          answer.split(" ")[1],
-          answer.split(" ")[2]
-        );
+        await decompressFile(currentDir, args);
         break;
       default:
         console.log("Invalid command\n");
@@ -92,4 +86,4 @@ async function main() {
   }
 }
 
-await main();
+(async () => await main())();

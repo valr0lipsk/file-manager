@@ -2,6 +2,11 @@ import fs from "fs/promises";
 import path from "path";
 
 async function createFile(currentDir, fileName) {
+  if (!fileName) {
+    console.log("Error: Not enough arguments for 'create' command");
+    return;
+  }
+
   try {
     await fs.appendFile(path.resolve(currentDir, fileName), "", { flag: "ax" });
     console.log(`File "${fileName}" created\n`);

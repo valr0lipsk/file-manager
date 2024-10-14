@@ -2,6 +2,11 @@ import path from "path";
 import fs from "fs/promises";
 
 async function renameFile(currentDir, oldName, newName) {
+  if (!oldName || !newName) {
+    console.log("Error: Not enough arguments for 'rename' command");
+    return;
+  }
+
   try {
     await fs.rename(
       path.resolve(currentDir, oldName),

@@ -2,6 +2,11 @@ import path from "path";
 import fs from "fs/promises";
 
 async function getNewCurrentDirectoryPath(currentDirectoryPath, newPath) {
+  console.log(newPath);
+  if (!newPath) {
+    return path.resolve(currentDirectoryPath, "..");
+  }
+
   if (newPath) {
     const nPath = path.resolve(currentDirectoryPath, newPath);
 

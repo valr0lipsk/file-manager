@@ -1,14 +1,32 @@
 import path from "path";
 import fs from "fs";
+import { pipeline } from "stream/promises";
 
-async function copyFile(currentDir, fileName, pathToCopy) {
+async function copyFile(currentDir, args) {
+  if (args.length < 2) {
+    console.log("Error: Not enough arguments for 'cp' command");
+    return;
+  }
+
+  const sourceFile = args[0];
+  const destination = args.slice(1).join(" ");
+
   try {
-    const curPath = path.resolve(currentDir, fileName);
-    const copyPath = path.resolve(pathToCopy, fileName);
-    fs.createReadStream(curPath).pipe(fs.createWriteStream(copyPath));
-    console.log("Copied!");
+    const sourcePath = path.resolve(currentDir, sourceFile);
+    const destPath = path.resolve(currentDir, destination, sourceFile);
+
+    await pipeline(
+      fs.createReadStream(sourcePath),
+      fs.createWriteStream(destPath)
+    );
+
+    console.log(`Copied!`);
   } catch (error) {
-    console.log(`Error: ${error}`);
+    if (error.code === "ENOENT") {
+      console.log(`Error: File or directory not found - ${error.path}`);
+    } else {
+      console.log(`Error copying file: ${error.message}`);
+    }
   }
 }
 

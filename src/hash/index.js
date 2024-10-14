@@ -4,7 +4,8 @@ import { createHash } from "crypto";
 
 async function getHash(currentDir, fileName) {
   try {
-    const file = await fs.readFile(path.resolve(currentDir, fileName));
+    const pathToFile = path.resolve(currentDir, fileName);
+    const file = await fs.readFile(pathToFile);
     const hash = createHash("sha256").update(file).digest("hex");
     console.log(hash);
   } catch (_) {

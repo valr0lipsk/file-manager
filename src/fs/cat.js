@@ -2,6 +2,11 @@ import path from "path";
 import fs from "fs";
 
 async function readFileContent(currentDir, fileName) {
+  if (!fileName) {
+    console.log("Error: Not enough arguments for 'cat' command");
+    return;
+  }
+
   try {
     const pathToFile = path.resolve(currentDir, fileName);
     const stream = fs.createReadStream(pathToFile);
