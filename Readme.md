@@ -6,4 +6,4 @@ So first try to run `npm run start -- -- --username=UserName` instead of rating 
 
 # Important note №2
 
-Commands use paths relative to the current directory (it's either directory you're moved in using `cd`/`up` command or initial working directory).
+File manager commands use paths relative to the current directory (it's either the directory you're moved to using `cd`/`up` command or an initial working directory).
